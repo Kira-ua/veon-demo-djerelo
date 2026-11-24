@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.svg";
+import { main, nav, messengers, footerGroups, SOON } from "../data/site";
+import FutureLink from "./FutureLink.astro";
+import WriteMenu from "./WriteMenu.astro";
+import Icon from "./Icon.astro";
+---
+<header class="site-header" data-header data-rec="R-032,R-036">
+  <div class="container site-header__bar">
+    <a class="site-header__logo" href="#top">
+      <Image src={logo} alt="Джерело Life — на початок сторінки" width={164} height={40} loading="eager" />
+    </a>
+
+    <nav class="site-nav" aria-label="Розділи сторінки">
+      <ul>
+        {nav.map((n) => <li><a href={`#${n.id}`}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="site-header__lang" aria-label="Мова сайту" role="group">
+      <span class="lang-current" aria-current="true">UA</span>
+      <FutureLink note={SOON} class="lang-soon">RU</FutureLink>
+    </div>
+
+    <a class="site-header__phone" href={`tel:${main.tel}`}>{main.label}</a>
+    <WriteMenu variant="action" class="site-header__write" />
+
+    <a class="icon-btn icon-btn--action site-header__call" href={`tel:${main.tel}`} aria-label={`Подзвонити: ${main.label}`}><Icon name="phone" size={22} /></a>
+    <button class="icon-btn site-header__toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span class="icon-open"><Icon name="menu" size={22} /></span>
+      <span class="icon-close"><Icon name="close" size={22} /></span>
+      <span class="visually-hidden">Меню</span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-menu hidden>
+    <div class="container mobile-menu__inner">
+      <ul class="mobile-menu__nav">
+        {nav.map((n) => <li><a href={`#${n.id}`} data-menu-link>{n.label}</a></li>)}
+      </ul>
+      <div class="mobile-menu__contact">
+        <a class="btn btn--action btn--wide" href={`tel:${main.tel}`}><Icon name="phone" /><span>Подзвонити: {main.short}</span></a>
+        <ul class="mobile-menu__messengers" aria-label={`Написати на ${main.label}`}>
+          {messengers(main).map((m) => <li><a class="btn btn--ghost" href={m.href} rel="noopener">{m.name}</a></li>)}
+        </ul>
+      </div>
+      <details class="mobile-menu__all">
+        <summary>Усі послуги</summary>
+        <ul>
+          {footerGroups.slice(0, 3).flatMap((g) => g.items).map((i) => <li><FutureLink note={SOON}>{i}</FutureLink></li>)}
+        </ul>
+      </details>
+      <div class="mobile-menu__lang">
+        <span aria-current="true">UA</span>
+        <FutureLink note={SOON}>RU</FutureLink>
+      </div>
+    </div>
+  </div>
+</header>

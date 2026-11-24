@@ -1,0 +1,67 @@
+---
+// «Що сталося з вашим близьким?» — six life situations instead of nine department cards (R-033).
+// Facts: company.products_services, company.business_lines, C-004, C-005, C-019.
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { main, answers, SOON } from "../data/site";
+import insult from "../assets/photos/neiropsihologiya.jpg";
+import trauma from "../assets/photos/galereya-07.jpg";
+import surgery from "../assets/photos/galereya-11.jpg";
+import heart from "../assets/photos/galereya-05.jpg";
+import elderly from "../assets/photos/galereya-03.jpg";
+
+interface Sit { id: string; title: string; what: string; price: string; amount: string; photo?: ImageMetadata; alt?: string; }
+const stay = "Пакети з проживанням від";
+const items: Sit[] = [
+  { id: "insult", title: "Після інсульту", what: "Відновлюємо ходьбу, мову, ковтання й когнітивні функції. Працюють нейропсихолог і ерготерапевт.", price: stay, amount: "2500 грн/доба", photo: insult, alt: "Літній пацієнт виконує вправу з дзеркалом разом із фахівцем центру" },
+  { id: "travma", title: "Після травми чи перелому", what: "Реабілітація після переломів і травм, травми хребта, черепно-мозкової травми, перелому шийки стегна.", price: stay, amount: "2500 грн/доба", photo: trauma, alt: "Фахівець центру працює з пацієнтом у підвісній системі" },
+  { id: "operacia", title: "Після операції чи ендопротезування", what: "Післяопераційна реабілітація, зокрема після видалення міжхребцевої грижі та ендопротезування колінного чи кульшового суглоба.", price: stay, amount: "2500 грн/доба", photo: surgery, alt: "Фахівець центру працює з коліном пацієнта" },
+  { id: "infarkt", title: "Після інфаркту або COVID-19", what: "Фізична реабілітація після інфаркту міокарда та після COVID-19: кінезіотерапія, ерготерапія, масаж, басейн.", price: stay, amount: "2500 грн/доба", photo: heart, alt: "Пацієнт займається на тренажері під наглядом фахівця центру" },
+  { id: "doglyad", title: "Літній родич потребує догляду 24/7", what: "Пансіонат для літніх: щоденний лікарський контроль, 5-разове харчування, кімнати з багатофункціональними ліжками.", price: "Догляд за літніми від", amount: "1000 до 1500 грн/доба", photo: elderly, alt: "Літні мешканці центру за заняттям на терасі разом із медсестрою" },
+  { id: "paliativ", title: "Тяжкий стан, паліативна допомога", what: "У центрі є хоспіс і паліативна допомога.", price: "Паліативна допомога від", amount: "1500 до 4500 грн/доба" },
+];
+const also = ["Реабілітація вдома", "Патронажна служба", "Амбулаторне лікування", "Прокат медтехніки"];
+---
+<Section id="sytuacii" rec="R-033" class="section situations">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="q">Що сталося з вашим близьким?</h2>
+      <p class="a">{answers.sytuacii}</p>
+    </div>
+
+    <div class="sit__list" data-rec="R-204">
+      {items.map((s) => (
+        <div class="sit__item">
+          <h3 class="sit__h">
+            <button class="sit__btn" type="button" id={`sit-${s.id}`} aria-controls={`sit-${s.id}-panel`} aria-expanded="true" data-sit>
+              <span>{s.title}</span><span class="sit__mark" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class:list={["sit__panel", { "sit__panel--text": !s.photo }]} id={`sit-${s.id}-panel`} role="region" aria-labelledby={`sit-${s.id}`}>
+            {s.photo ? (
+              <div class="sit__photo" data-rec="R-202,R-203">
+                <Picture src={s.photo} width={Math.min(s.photo.width, 1280)} height={Math.round(Math.min(s.photo.width, 1280) * s.photo.height / s.photo.width)} formats={["avif", "webp"]} widths={[400, 800, 1280]} sizes="(min-width: 1024px) 700px, calc(100vw - 3rem)" alt={s.alt!} loading="lazy" decoding="async" />
+              </div>
+            ) : null}
+            <p class:list={["sit__what", { "sit__solo": !s.photo }]}>{s.what}</p>
+            <p class="sit__price">{s.price} <strong>{s.amount}</strong></p>
+            <div class="sit__actions">
+              <a class="btn btn--action" href={`tel:${main.tel}`} data-rec="R-036"><Icon name="phone" /><span>Запитати про місце</span></a>
+              <FutureLink note={SOON}>Детальніше</FutureLink>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="also">
+      <p>Також допомагаємо:</p>
+      <ul>
+        {also.map((a) => <li><FutureLink note={SOON}>{a}</FutureLink></li>)}
+      </ul>
+    </div>
+  </div>
+</Section>

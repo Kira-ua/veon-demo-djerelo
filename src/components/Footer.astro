@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.svg";
+import FutureLink from "./FutureLink.astro";
+import { main, address, footerGroups, SOON } from "../data/site";
+---
+<footer class="site-footer" data-rec="R-032">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href="#top"><Image src={logo} alt="Джерело Life — на початок сторінки" width={148} height={36} /></a>
+      <p>Реабілітаційний центр «Джерело Life»</p>
+      <p>{address}</p>
+      <a href={`tel:${main.tel}`}>{main.label}</a>
+    </div>
+    {footerGroups.map((g) => (
+      <nav class="footer__group" aria-label={g.title}>
+        <p class="footer__title">{g.title}</p>
+        <ul>
+          {g.items.map((i) => <li><FutureLink note={SOON}>{i}</FutureLink></li>)}
+        </ul>
+      </nav>
+    ))}
+  </div>
+</footer>

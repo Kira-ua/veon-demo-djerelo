@@ -1,0 +1,31 @@
+---
+// «Хто лікуватиме вашого близького?» — C-022 (chief doctor by name), C-004. No portraits without the client's consent.
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import { team, answers, SOON } from "../data/site";
+import photo from "../assets/photos/about_promo-1.jpg";
+---
+<Section id="komanda" class="section team">
+  <div class="container team__grid">
+    <div class="team__text">
+      <h2 class="q">Хто лікуватиме вашого близького?</h2>
+      <p class="a">{answers.komanda}</p>
+      <div class="team__chief">
+        <h3 class="team__label">Головний лікар</h3>
+        <p class="team__name">{team.chief}</p>
+        <p class="team__role">{team.chiefRole}</p>
+      </div>
+      <div class="team__roles">
+        <h3 class="team__label">У команді</h3>
+        <ul>
+          {team.roles.map((r) => <li>{r}</li>)}
+        </ul>
+      </div>
+      <FutureLink note={SOON} class="team__more">Вся команда</FutureLink>
+    </div>
+    <figure class="team__fig" data-rec="R-202,R-203">
+      <Picture src={photo} width={1280} height={Math.round(1280 * photo.height / photo.width)} formats={["avif", "webp"]} widths={[400, 800, 1280]} sizes="(min-width: 1024px) 620px, calc(100vw - 3rem)" alt="Фахівці центру за спільним столом під час наради" loading="lazy" decoding="async" />
+    </figure>
+  </div>
+</Section>

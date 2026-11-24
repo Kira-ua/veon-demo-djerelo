@@ -1,0 +1,39 @@
+---
+// «Як тут живуть і відновлюються?» — facts C-003, C-004, C-005, C-018, C-021; client photos.
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import { answers } from "../data/site";
+import terrace from "../assets/photos/galereya-04.jpg";
+import pool from "../assets/photos/advances-company.jpg";
+import gym from "../assets/photos/galereya-06.jpg";
+
+const facts = [
+  "Догляд 24/7, цілодобовий медичний моніторинг",
+  "Кондиціонування й кварцування",
+  "Багатофункціональні ліжка, протипролежневі матраци",
+  "Басейн для фізичної терапії",
+  "Відвідування щодня, 10:00–18:00",
+];
+---
+<Section id="umovy" class="section">
+  <div class="container cond">
+    <div class="cond__head">
+      <div class="head">
+        <h2 class="q">Як тут живуть і відновлюються?</h2>
+        <p class="a">{answers.umovy}</p>
+      </div>
+    </div>
+    <ul class="cond__facts">
+      {facts.map((f) => <li>{f}</li>)}
+    </ul>
+    <figure class="cond__fig cond__fig--big" data-reveal data-rec="R-202,R-203">
+      <Picture src={terrace} formats={["avif", "webp"]} widths={[400, 800, 1280]} sizes="(min-width: 1024px) 720px, calc(100vw - 3rem)" alt="Мешканці центру за спільним столом на терасі, поруч медсестра" loading="lazy" decoding="async" />
+    </figure>
+    <figure class="cond__fig cond__fig--pool" data-reveal style="--reveal-delay:80ms">
+      <Picture src={pool} formats={["avif", "webp"]} widths={[400, 772]} sizes="(min-width: 1024px) 480px, 50vw" alt="Заняття в басейні з фахівцем центру" loading="lazy" decoding="async" />
+    </figure>
+    <figure class="cond__fig cond__fig--gym" data-reveal style="--reveal-delay:160ms">
+      <Picture src={gym} formats={["avif", "webp"]} widths={[400, 800]} sizes="(min-width: 1024px) 520px, 50vw" alt="Літній пацієнт займається на тренажері з фахівцем центру" loading="lazy" decoding="async" />
+    </figure>
+  </div>
+</Section>

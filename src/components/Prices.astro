@@ -1,0 +1,54 @@
+---
+// «Скільки коштує доба з проживанням?» — prices on the homepage (R-034). Facts: C-019, C-020, C-021.
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import WriteMenu from "./WriteMenu.astro";
+import Icon from "./Icon.astro";
+import { main, priceTabs, included, SOON } from "../data/site";
+---
+<Section id="ciny" rec="R-034,G-R005,S-R009" class="section prices">
+  <div class="container">
+    <div class="head head--split">
+      <h2 class="q">Скільки коштує доба з проживанням?</h2>
+      <p class="a">Від 2500 грн на добу, з лікарем, доглядом і харчуванням.</p>
+    </div>
+
+    <div class="prices__grid">
+      <div class="prices__main">
+        <div class="tabs" role="tablist" aria-label="Вид розміщення" data-tabs>
+          {priceTabs.map((t, i) => (
+            <button class="tab" type="button" role="tab" id={`tab-${t.id}`} aria-controls={`price-${t.id}`} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? 0 : -1}>{t.tab}</button>
+          ))}
+          <span class="tabs__ink" aria-hidden="true"></span>
+        </div>
+
+        {priceTabs.map((t) => (
+          <div class="price-panel" role="tabpanel" id={`price-${t.id}`} aria-labelledby={`tab-${t.id}`} tabindex="0">
+            <h3 class="price-panel__h">{t.tab}</h3>
+            {t.rows.map((r) => (
+              <div class="price-row">
+                <p class="price-row__name">{r.name}</p>
+                <p class="price-row__price">{r.price}<span class="price-row__unit">{r.unit}</span></p>
+              </div>
+            ))}
+            {"note" in t && t.note && <p class="price-panel__note">{t.note}</p>}
+          </div>
+        ))}
+
+        <div class="prices__actions">
+          <a class="btn btn--action" href={`tel:${main.tel}`} data-rec="R-036"><Icon name="phone" /><span>Уточнити вартість</span></a>
+          <WriteMenu variant="ghost" />
+          <FutureLink note={SOON}>Повний прайс</FutureLink>
+        </div>
+      </div>
+
+      <aside class="included" aria-labelledby="included-h">
+        <h3 class="included__h" id="included-h">Що входить у пакети стаціонару</h3>
+        <ul>
+          {included.map((x) => <li>{x}</li>)}
+        </ul>
+        <p class="included__refund">Повертаємо кошти за невикористані дні.</p>
+      </aside>
+    </div>
+  </div>
+</Section>

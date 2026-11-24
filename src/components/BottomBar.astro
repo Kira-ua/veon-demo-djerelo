@@ -1,0 +1,9 @@
+---
+import { main } from "../data/site";
+import WriteMenu from "./WriteMenu.astro";
+import Icon from "./Icon.astro";
+---
+<div class="bottom-bar" data-bottom-bar data-rec="R-036" role="region" aria-label="Зв'язатися з центром">
+  <a class="btn btn--action" href={`tel:${main.tel}`}><Icon name="phone" /><span>Подзвонити</span></a>
+  <WriteMenu variant="ghost" up class="write--end" />
+</div>

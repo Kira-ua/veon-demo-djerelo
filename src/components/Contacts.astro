@@ -1,0 +1,54 @@
+---
+// «Коли можна приїхати?» — C-018 (hours), C-009 (numbers and messengers), company.contacts, confirmed socials.
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { main, phones, messengers, email, address, mapHref, socials, hours } from "../data/site";
+const others = phones.slice(1);
+---
+<Section id="kontakty" class="section contacts on-ink">
+  <div class="container contacts__grid">
+    <div class="contacts__when">
+      <h2 class="q">Коли можна приїхати?</h2>
+      <p class="a">Відвідування щодня, ПН–НД.</p>
+      <p class="hours">{hours.visits}</p>
+      <ul class="sched">
+        <li><strong>Консультації лікарів:</strong> {hours.consult}</li>
+        <li><strong>Амбулаторні відвідування:</strong> {hours.outpatient}</li>
+      </ul>
+    </div>
+
+    <div class="contacts__how">
+      <div class="contacts__main" data-rec="R-036">
+        <p class="contacts__label">Основний номер</p>
+        <a class="contacts__phone" href={`tel:${main.tel}`}>{main.label}</a>
+        <ul class="contacts__msg" aria-label={`Месенджери номера ${main.label}`}>
+          {messengers(main).map((m) => <li><a class="btn btn--action" href={m.href} rel="noopener">{m.name}</a></li>)}
+        </ul>
+      </div>
+
+      <ul class="contacts__others" aria-label="Інші номери центру">
+        {others.map((p) => (
+          <li>
+            <a class="other-phone" href={`tel:${p.tel}`}>{p.label}</a>
+            <ul class="other-msg">
+              {messengers(p).map((m) => <li><a href={m.href} rel="noopener" aria-label={`${m.name}, ${p.label}`}>{m.name}</a></li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+    <div class="contacts__lines">
+        <p class="contacts__line">
+          <span>{address}</span>
+          <a href={mapHref} rel="noopener"><Icon name="map" /><span>Відкрити на карті</span></a>
+        </p>
+        <p class="contacts__line">
+          <a href={`mailto:${email}`}><Icon name="mail" /><span>{email}</span></a>
+        </p>
+        <ul class="contacts__social" aria-label="Соцмережі">
+          {socials.map((s) => <li class="contacts__line"><a href={s.href} rel="noopener">{s.name}</a></li>)}
+        </ul>
+      </div>
+  </div>
+</Section>

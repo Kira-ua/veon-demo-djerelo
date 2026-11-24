@@ -1,0 +1,15 @@
+---
+// «Написати»: a disclosure with the three messengers of one number (works without JS: <details>).
+import { main, messengers, phones } from "../data/site";
+import Icon from "./Icon.astro";
+interface Props { label?: string; variant?: "ghost" | "action" | "ghost-ink"; up?: boolean; phone?: (typeof phones)[number]; class?: string; rec?: string; }
+const { label = "Написати", variant = "ghost", up = false, phone = main, class: cls, rec } = Astro.props;
+---
+<details class:list={["write", { "write--up": up }, cls]} data-write data-rec={rec}>
+  <summary class:list={["btn", `btn--${variant}`]}><Icon name="chat" /><span>{label}</span></summary>
+  <ul class="write__list" aria-label={`Месенджери номера ${phone.label}`}>
+    {messengers(phone).map((m) => (
+      <li><a class="write__item" href={m.href} rel="noopener">{m.name}</a></li>
+    ))}
+  </ul>
+</details>

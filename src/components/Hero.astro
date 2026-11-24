@@ -1,0 +1,36 @@
+---
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import WriteMenu from "./WriteMenu.astro";
+import Icon from "./Icon.astro";
+import { main } from "../data/site";
+import hero from "../assets/photos/galereya-01.jpg";
+---
+<Section id="top" rec="R-031,G-R004" class="hero">
+  <div class="container hero__grid">
+    <h1 class="hero__title">Реабілітаційний центр <br class="hero__br" />з проживанням в Одесі</h1>
+    <p class="hero__lead">Після інсульту, травм і операцій; догляд 24/7 і хоспіс. Приймаємо з Миколаєва та інших міст.</p>
+    <div class="hero__actions">
+      <a class="btn btn--action btn--hero" href={`tel:${main.tel}`}><Icon name="phone" /><span>Подзвонити: {main.short}</span></a>
+      <WriteMenu variant="ghost" />
+    </div>
+    <p class="hero__price">
+      <span class="hero__price-text"><span class="hero__price-pre">З проживанням </span>від <strong>2500&nbsp;грн/доба</strong></span>
+      <a class="text-link" href="#ciny">Усі ціни</a>
+    </p>
+  </div>
+  <div class="container">
+    <div class="hero__media" data-rec="R-201,R-205,G-R006">
+      <Picture
+        src={hero}
+        formats={["avif", "webp"]}
+        widths={[400, 800, 1280]}
+        sizes="(min-width: 1440px) 1280px, calc(100vw - 3rem)"
+        alt="Фахівець центру підтримує пацієнта під час ходьби в саду"
+        loading="eager"
+        fetchpriority="high"
+        class="hero__img"
+      />
+    </div>
+  </div>
+</Section>

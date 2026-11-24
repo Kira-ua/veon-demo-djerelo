@@ -1,0 +1,67 @@
+/* Hallmark · shape: questions-and-answers single page · genre: editorial · theme: custom · job: book · idea: "Відповідь родині: кожен розділ — питання родича і відповідь фактом центру, поруч той самий номер" · vibe: "спокійно, прямо, по-людськи, без лікарняного холоду"
+ * paper: #FFFFFF · accent: #6D9AE4 (action #78D651) · display: Piazzolla · body: Onest · hero: H1 на всю ширину над широким кадром «терапевт веде пацієнта садом», ціна і дзвінок у першому екрані · nav: logo + 5 anchors + phone as text + «Написати» · footer: compact, 4 groups of future pages · imagery: client photos · signature: заголовки-питання родини курсивом, перемикач «Що сталося з вашим близьким?», одне число 10:00–18:00 у темному фіналі
+ * surface: absolute · axes: white/roman-serif/chromatic-blue · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: E (one hero photo is 1280 px, soft on retina), mitigated by type-led first screen and a 16:7 crop; originals requested from the client */
+/* Hallmark · waive 7b · concept.md §5 Look: paper #FFFFFF and white text on the ink finale are approved concept colours (veon-concept colors) · cream paper with a serif is the "spent" look the concept rejects; approved concept outranks Hallmark (decisions.md) */
+/* Hallmark · waive 39b · .sit__btn rows are 64–76px · the situation switcher is a list of rows carrying a 28px display title (concept.md: «шість ситуацій строками Piazzolla 28 px»), not a marketing button; hit target is the full row */
+/* Hallmark · answer F4 · .btn--action, .icon-btn--action · concept.md rule «зелений = зв'язатися»: every filled control is the same contact action in one colour (call, messengers); .sit__btn is an unfilled list row; recipes merge into one class in FULL */
+/* Hallmark · waive 44c · hero 1061 px at a 900 fold · concept.md «кадр уходить за край першого екрана і тягне вниз»: H1, call, «Написати» and the price sit inside 1440x900; only the photo runs on */
+/* Client design tokens — only from design/concept.md (veon-concept: colors, fonts). */
+:root {
+  /* colour roles */
+  --color-bg: #FFFFFF;          /* paper */
+  --color-text: #15233F;        /* ink */
+  --color-accent: #6D9AE4;      /* sky — brand band, ink text only */
+  --color-accent-ink: #15233F;  /* text on the sky band */
+  --color-link: #2F5FB3;        /* sky-deep — text links */
+  --color-action: #78D651;      /* branch — contact actions only, ink text */
+  --color-action-hover: #8FDF6E;
+  --color-mist: #EEF3FC;        /* panels */
+  --color-muted: #4A5672;       /* secondary text */
+  --color-line: #C5D3EC;        /* decorative rules */
+  --color-on-ink: #FFFFFF;      /* text on the dark finale */
+  --color-on-ink-muted: #C9D4EA;
+  --color-ink-line: #3A4A6B;
+  --color-sky-hover: #8DB1EC;
+
+  /* type */
+  --font-display: "Piazzolla", Georgia, "Times New Roman", serif;
+  --font-body: "Onest", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --fs-small: 0.875rem;                                   /* 14 */
+  --fs-body: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);    /* 17–18 */
+  --fs-lead: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);      /* 20–24 */
+  --fs-h3: clamp(1.375rem, 1.15rem + 0.8vw, 1.75rem);     /* 22–28 */
+  --fs-h2: clamp(2rem, 1.35rem + 2.6vw, 3.5rem);          /* 32–56 */
+  --fs-h1: clamp(2.375rem, 1.2rem + 4.9vw, 5.5rem);       /* 38–88 */
+  --fs-price: clamp(1.875rem, 1.5rem + 1.2vw, 2.5rem);    /* 30–40 */
+  --fs-hours: clamp(4.5rem, 11vw, 10rem);                 /* the one graphic number */
+  --lh-body: 1.55;
+  --lh-h2: 1.1;
+  --lh-h1: 0.98;
+  --measure: 68ch;
+
+  /* space — 8 rhythm */
+  --s-1: 0.5rem; --s-2: 1rem; --s-3: 1.5rem; --s-4: 2rem; --s-6: 3rem; --s-8: 4rem; --s-12: 6rem;
+  --space: 1.5rem;              /* page gutter: 24 / 40 / 80 */
+  --container: 1280px;
+  --gap: 1.5rem;
+  --section-y: 6rem;            /* 96 → 112 */
+  --header-h: 56px;
+  --tap: 44px;
+  --btn-h: 56px;
+
+  /* shape and motion */
+  --radius: 6px;
+  --ring: 3px;
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --dur-fast: 120ms;
+  --dur-ui: 220ms;
+  --dur-hero: 900ms;
+}
+@media (min-width: 768px) {
+  :root { --space: 2.5rem; --header-h: 72px; --btn-h: 52px; }
+}
+@media (min-width: 1200px) {
+  :root { --space: 5rem; --section-y: 7rem; }
+}
